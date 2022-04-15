@@ -7,6 +7,7 @@ for (let i = 0; i < localStorage.length; i++) {
     
 }
 let arrayname = []
+let relultsBank =[]
 
 
 let select = document.querySelector("select")
@@ -37,11 +38,34 @@ function addInformation(event) {
                allObject[i].dpay = `${downPayment.value}`
            
           }
-     }      
-    console.log (allObject)
-     
+     }
+     console.log(allObject)
+     for (let i = 0; i < allObject.length; i++) {
+          if (allObject[i]["inloan"] != undefined && allObject[i]["dpay"] != undefined) {
+               relultsBank.push(allObject[i])
+          }
+     }
+     for (let i = 0; i < relultsBank.length; i++) {
+          let neededSum = (Number(relultsBank[i].inloan) * Number(relultsBank[i].down )/ 100)
+          if (neededSum > Number(relultsBank[i].dpay)) {
+               alert('sorry, but the  down payment is not enough')
+          }
+          else {
+               let numberSum =  Number(relultsBank[i].inloan)
+               let nuberDpay = Number(relultsBank[i].dpay)
+               let ammountBorrowed = numberSum - nuberDpay
+               let month = Number(relultsBank[i].term) * 12
+               let parth = Number(relultsBank[i].rate) / 12
+               let formulaParth = Number(parth) + 1
+               let myltyParth = Number((formulaParth) ** month)
+               let anotherParth = Number((formulaParth) ** month) - 1
+               for (let i = 0; i <= month; i++) {
+                    let monthpayment = ammountBorrowed * parth * myltyParth / anotherParth
+                    console.log(monthpayment)
+               }
+             
+     } 
+
 }
-
-  
  
-
+}
