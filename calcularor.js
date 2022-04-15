@@ -1,4 +1,5 @@
 let formCalculator = document.querySelector(".form__calculator");
+let k = document.querySelector(".k")
 let obj = new Object();
 let allObject = []
 for (let i = 0; i < localStorage.length; i++) {
@@ -39,33 +40,34 @@ function addInformation(event) {
            
           }
      }
-     console.log(allObject)
-     for (let i = 0; i < allObject.length; i++) {
+      for (let i = 0; i < allObject.length; i++) {
           if (allObject[i]["inloan"] != undefined && allObject[i]["dpay"] != undefined) {
                relultsBank.push(allObject[i])
           }
      }
+           
+}
+function calculate() {
      for (let i = 0; i < relultsBank.length; i++) {
-          let neededSum = (Number(relultsBank[i].inloan) * Number(relultsBank[i].down )/ 100)
+          let neededSum = (Number(relultsBank[i].inloan) * Number(relultsBank[i].down) / 100)
           if (neededSum > Number(relultsBank[i].dpay)) {
                alert('sorry, but the  down payment is not enough')
           }
           else {
-               let numberSum =  Number(relultsBank[i].inloan)
+               let numberSum = Number(relultsBank[i].inloan)
                let nuberDpay = Number(relultsBank[i].dpay)
                let ammountBorrowed = numberSum - nuberDpay
-               let month = Number(relultsBank[i].term) * 12
-               let parth = Number(relultsBank[i].rate) / 12
-               let formulaParth = Number(parth) + 1
-               let myltyParth = Number((formulaParth) ** month)
-               let anotherParth = Number((formulaParth) ** month) - 1
+               let month = Number(relultsBank[i].term)
+               let parth = Number(relultsBank[i].rate)
+               
+               
                for (let i = 0; i <= month; i++) {
-                    let monthpayment = ammountBorrowed * parth * myltyParth / anotherParth
+                         let monthpayment = ammountBorrowed * (parth / 12) *  (1 + parth / 12) ** i / (1 + parth / 12) ** i -1
                     console.log(monthpayment)
                }
              
-     } 
+          }
 
+     }
 }
- 
-}
+k.addEventListener('click', calculate)
