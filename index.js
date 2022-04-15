@@ -28,16 +28,54 @@ function handleSubmit(event) {
     localStorage.setItem(`${obj.name}`, JSON.stringify(obj));
     obj.name = JSON.parse(localStorage.getItem("obj"));
     
-  
+  // for one bank 
   if (localStorage.length === 1) {
+    // function for delete
     let btn = document.querySelector(".cellDelete")
     let button = document.querySelector(".delete")
       button.addEventListener("click", () => {
       localStorage.clear();
        btn.parentNode.innerHTML = ""
-    })
+      })
+    // function for edit
+    let cellEdit = document.querySelector(".cellEdit")
+    let buttonEdit = document.querySelector(".edit")
+      buttonEdit.addEventListener("click", () => {
+      let parentlist = cellEdit.parentNode.children
+      let newChildren = [...parentlist]
+      let parentNew = newChildren.slice(0, 5)
+        for (let i = 0; i < parentNew.length; i++) {
+          parentNew[i].setAttribute("contenteditable", "true")
+          parentNew[i].classList.add('activecell')
+        }    
+      })
+    // function for confirm
+    let buttonConfirm = document.querySelector(".confirm");
+    let cellConfirm = document.querySelector(".cellEdit")
+    buttonConfirm.addEventListener("click", () => {
+          let parentlist = cellConfirm.parentNode.children
+          let newChildren = [...parentlist]
+          let parentNew = newChildren.slice(0, 5)
+          let firstValue = newChildren.slice(0, 1)
+         localStorage.removeItem(`${firstValue[0].innerHTML}`)
+          let obj = new Object();
+          obj.name = parentNew[0].innerHTML;
+          obj.rate = parentNew[1].innerHTML;
+          obj.loan = parentNew[2].innerHTML;
+          obj.down = parentNew[3].innerHTML;
+          obj.term = parentNew[4].innerHTML;
+          localStorage.setItem(`${obj.name}`, JSON.stringify(obj));
+          obj.name = JSON.parse(localStorage.getItem("obj"));
+        for (let i = 0; i < parentNew.length; i++) {
+          parentNew[i].removeAttribute("contenteditable", "true")
+          parentNew[i].classList.remove('activecell')
+        }   
+     })
   }
+
+// for many banks  
   else {
+    // function for delete
     let arraybtnDelete = document.querySelectorAll(".delete");
     let newarraybtnDelete = [...arraybtnDelete]
     for (let i = 0; i < newarraybtnDelete.length; i++) {
@@ -51,6 +89,8 @@ function handleSubmit(event) {
         AllParent.innerHTML = ""
       })
     }
+
+    // function for edit
     let arraybtnEdit = document.querySelectorAll(".edit");
     let newarraybtnEdit = [...arraybtnEdit]
     for (let i = 0; i < newarraybtnEdit.length; i++) {
@@ -68,6 +108,8 @@ function handleSubmit(event) {
         
       )
     }
+
+     // function for confirm
     let arraybtnConfirm = document.querySelectorAll(".confirm");
     let newarraybtnConf = [...arraybtnConfirm]
       for (let i = 0; i < newarraybtnConf.length; i++) {

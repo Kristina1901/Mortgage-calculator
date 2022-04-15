@@ -123,3 +123,10 @@ a:focus {
  form button {
      padding: 5px;
  }
+ .form__calculator {
+     margin-top: 35px;
+ }
+ select {
+     width: 171px;
+     margin-bottom: 15px;
+ }
