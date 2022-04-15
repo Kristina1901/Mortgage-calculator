@@ -59,12 +59,15 @@ function calculate() {
                let ammountBorrowed = numberSum - nuberDpay
                let month = Number(relultsBank[i].term)
                let parth = Number(relultsBank[i].rate)
+               let monthpayment = ammountBorrowed * (parth / 12) * (1 + (parth / 12) ** 1) 
+               let c = 1 + parth / 12 ** 1 - 1
+               let result = monthpayment / c
+               console.log(result)
                
                
-               for (let i = 0; i <= month; i++) {
-                         let monthpayment = ammountBorrowed * (parth / 12) *  (1 + parth / 12) ** i / (1 + parth / 12) ** i -1
-                    console.log(monthpayment)
-               }
+               // for (let i = 0; i <= month; i++) {
+                    
+               // }
              
           }
 
