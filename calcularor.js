@@ -7,10 +7,15 @@ for (let i = 0; i < localStorage.length; i++) {
       allObject.push(obj[obj] = JSON.parse(localStorage.getItem(key)));
     
 }
+for (let i = 0; i < allObject.length; i++) {
+     allObject[i].inloan = undefined;
+     allObject[i].dpay = undefined
+           
+}
 let arrayname = []
-let relultsBank =[]
-
-
+let resultsBank = []
+let option
+const makeUniq = (arr) => [...new Set(arr)];
 let select = document.querySelector("select")
 for (let i = 0; i < allObject.length; i++) {
    arrayname.push(allObject[i].name)
@@ -22,10 +27,15 @@ for (let i = 0; i < arrayname.length; i++) {
       </option>`)
 }
 
-let valueSelect = select.value;
-
-   
-
+select.addEventListener('change', (event) => {
+     option = select.value;
+     return function() {
+    return option
+  };
+     
+          
+})
+     
 
 formCalculator.addEventListener("submit", addInformation);
 function addInformation(event) {
@@ -33,51 +43,61 @@ function addInformation(event) {
      const {
           elements: { initialLoan, downPayment }
      } = event.currentTarget;
+     
      for (let i = 0; i < allObject.length; i++) {
-          if (allObject[i].name === valueSelect) {
+          if (allObject[i].name === option) {
                allObject[i].inloan = `${initialLoan.value}`;
                allObject[i].dpay = `${downPayment.value}`
-           
+                   
           }
+          
      }
-      for (let i = 0; i < allObject.length; i++) {
-          if (allObject[i]["inloan"] != undefined && allObject[i]["dpay"] != undefined) {
-               relultsBank.push(allObject[i])
+     for (let i = 0; i < allObject.length; i++) {
+      if (allObject[i]["inloan"] != undefined && allObject[i]["dpay"] != undefined) {
+       resultsBank.push(allObject[i])
+                    
+               }
           }
-     }
-     calculate()
+     
+               
+     
+     
+      calculate(resultsBank)
+     
+}   
            
-}
+
 function calculate() {
-     for (let i = 0; i < relultsBank.length; i++) {
-          let neededSum = (Number(relultsBank[i].inloan) * Number(relultsBank[i].down) / 100)
-          if (neededSum > Number(relultsBank[i].dpay)) {
+     let arr = makeUniq(resultsBank);
+      
+     let neededSum = (Number(arr[arr.length - 1].inloan) * Number(arr[arr.length - 1].down) / 100)
+          if (neededSum > Number(arr[arr.length - 1].dpay)) {
               table.insertAdjacentHTML('beforeend',
           `<tr>
-           <th>${relultsBank[i].name}</th>
+           <th>${arr[arr.length - 1].name}</th>
            <th>sorry, but the  down payment is not enough</th>
            </tr>`)
           }
-          if (Number(relultsBank[i].loan) < relultsBank[i].inloan) {
+          else if (Number(arr[arr.length - 1].loan) < arr[arr.length - 1].inloan) {
                table.insertAdjacentHTML('beforeend',
                 `<tr>
-                 <th>${relultsBank[i].name}</th>
+                 <th>${arr[arr.length - 1].name}</th>
                  <th>sorry, but the initial loan mote than bank can offer you</th>
            </tr>`)
                
           }
           else {
-               let numberSum = Number(relultsBank[i].inloan)
-               let nuberDpay = Number(relultsBank[i].dpay)
+               let numberSum = Number(arr[arr.length - 1].inloan)
+               let nuberDpay = Number(arr[arr.length - 1].dpay)
                let ammountBorrowed = numberSum - nuberDpay
-               let month = Number(relultsBank[i].term) * 12
-               let parth = Number(relultsBank[i].rate) / 100
+               let month = Number(arr[arr.length - 1].term) * 12
+               let parth = Number(arr[arr.length - 1].rate) / 100
                let monthpayment = ammountBorrowed * (parth / 12) * (1 + parth / 12)** month 
                let c = (1 + parth / 12) ** month - 1
                let result = Math.round(monthpayment / c)
                table.insertAdjacentHTML('beforeend',
                 `<tr>
-                 <th>${relultsBank[i].name}</th>
+                 <th>${arr[arr.length - 1].name}</th>
                  <th>${result}</th>
            </tr>`)
                       
@@ -85,4 +105,3 @@ function calculate() {
           }
 
      }
-}
