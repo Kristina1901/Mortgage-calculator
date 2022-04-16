@@ -1,6 +1,6 @@
 let formCalculator = document.querySelector(".form__calculator");
-let k = document.querySelector(".k")
 let obj = new Object();
+const table = document.querySelector("table");
 let allObject = []
 for (let i = 0; i < localStorage.length; i++) {
 	 key = localStorage.key(i);
@@ -45,32 +45,44 @@ function addInformation(event) {
                relultsBank.push(allObject[i])
           }
      }
+     calculate()
            
 }
 function calculate() {
      for (let i = 0; i < relultsBank.length; i++) {
           let neededSum = (Number(relultsBank[i].inloan) * Number(relultsBank[i].down) / 100)
           if (neededSum > Number(relultsBank[i].dpay)) {
-               alert('sorry, but the  down payment is not enough')
+              table.insertAdjacentHTML('beforeend',
+          `<tr>
+           <th>${relultsBank[i].name}</th>
+           <th>sorry, but the  down payment is not enough</th>
+           </tr>`)
+          }
+          if (Number(relultsBank[i].loan) < relultsBank[i].inloan) {
+               table.insertAdjacentHTML('beforeend',
+                `<tr>
+                 <th>${relultsBank[i].name}</th>
+                 <th>sorry, but the initial loan mote than bank can offer you</th>
+           </tr>`)
+               
           }
           else {
                let numberSum = Number(relultsBank[i].inloan)
                let nuberDpay = Number(relultsBank[i].dpay)
                let ammountBorrowed = numberSum - nuberDpay
-               let month = Number(relultsBank[i].term)
-               let parth = Number(relultsBank[i].rate)
-               let monthpayment = ammountBorrowed * (parth / 12) * (1 + (parth / 12) ** 1) 
-               let c = 1 + parth / 12 ** 1 - 1
-               let result = monthpayment / c
-               console.log(result)
-               
-               
-               // for (let i = 0; i <= month; i++) {
-                    
-               // }
+               let month = Number(relultsBank[i].term) * 12
+               let parth = Number(relultsBank[i].rate) / 100
+               let monthpayment = ammountBorrowed * (parth / 12) * (1 + parth / 12)** month 
+               let c = (1 + parth / 12) ** month - 1
+               let result = Math.round(monthpayment / c)
+               table.insertAdjacentHTML('beforeend',
+                `<tr>
+                 <th>${relultsBank[i].name}</th>
+                 <th>${result}</th>
+           </tr>`)
+                      
              
           }
 
      }
 }
-k.addEventListener('click', calculate)
