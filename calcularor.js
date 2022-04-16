@@ -82,7 +82,7 @@ function calculate() {
                table.insertAdjacentHTML('beforeend',
                 `<tr>
                  <th>${arr[arr.length - 1].name}</th>
-                 <th>sorry, but the initial loan mote than bank can offer you</th>
+                 <th>sorry, but the initial loan more than bank can offer you</th>
            </tr>`)
                
           }
