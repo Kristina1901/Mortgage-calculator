@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: black;
+ background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(106, 74, 139, 1) 47%, rgba(0, 212, 255, 1) 100%);
     color: white;
     font-family: sans-serif;
     font-size: 14px;
@@ -29,6 +29,8 @@ form {
     align-items: center;
     justify-content: center;
     margin-top: 15px;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    border-radius: 8px;
 
 }
 
@@ -37,16 +39,8 @@ form {
 
 }
 
-table {
-    border: solid 2px purple;
-}
-
-tr {
-    border: solid 2px purple;
-}
-
 th {
-    border: solid 2px purple;
+    border: solid 2px white;
 }
 
 .contaner__table {
@@ -67,7 +61,7 @@ button {
     cursor: pointer;
     background-color: purple;
     color: white;
-
+   
 }
 
 .btn-submit {
@@ -75,16 +69,16 @@ button {
 }
 
 input:focus {
-    background-color: greenyellow;
+    background-color: aquamarine;
 }
 
-button:focus {
-    background-color: greenyellow;
+form button:focus {
+    background-color: aquamarine;
     color: black;
 }
 
-button:hover {
-    background-color: greenyellow;
+form button:hover {
+    background-color: aquamarine;
     color: black;
 }
 
@@ -119,10 +113,16 @@ a:focus {
 
 th button {
     padding: 15px;
+    background-color:rgba(205, 214, 219, 0.0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
 }
 
 form button {
     padding: 5px;
+    border-radius: 8px;
 }
 
 .form__calculator {
@@ -148,4 +148,16 @@ select {
     margin-left: 25px;
     position: relative;
     left: 400px;
+}
+img{
+    display: block;
+}
+.cellDelete {
+    border: none;
+}
+.cellEdit {
+   border: none;
+}
+.cellConfirm {
+    border: none;
 }
