@@ -69,7 +69,6 @@ function addInformation(event) {
 
 function calculate() {
      let arr = makeUniq(resultsBank);
-    console.log(arr)  
      let neededSum = (Number(arr[arr.length - 1].inloan) * Number(arr[arr.length - 1].down) / 100)
           if (neededSum > Number(arr[arr.length - 1].dpay)) {
               table.insertAdjacentHTML('beforeend',
@@ -87,11 +86,12 @@ function calculate() {
                
           }
           else {
+               let correctRate = arr[arr.length - 1].rate.replace(/,/, '.')
                let numberSum = Number(arr[arr.length - 1].inloan)
                let nuberDpay = Number(arr[arr.length - 1].dpay)
                let ammountBorrowed = numberSum - nuberDpay
                let month = Number(arr[arr.length - 1].term) * 12
-               let parth = Number(arr[arr.length - 1].rate) / 100
+               let parth = Number(correctRate) / 100
                let monthpayment = ammountBorrowed * (parth / 12) * (1 + parth / 12)** month 
                let c = (1 + parth / 12) ** month - 1
                let result = Math.round(monthpayment / c)
