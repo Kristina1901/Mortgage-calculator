@@ -15,9 +15,9 @@ function handleSubmit(event) {
       <th>${loan.value}</th>
       <th>${down.value}</th>
       <th>${term.value}</th>
-      <th class="cellDelete"><button class="delete"><img src="../img/trash.png" width="20" heigth="20"alt="delete"></button></th>
-      <th class="cellEdit"><button class="edit"><img src="../img/pen.png" width="20" heigth="20" alt="edit"></button></th>
-      <th class="cellConfirm"><button class="confirm"><img src="../img/gavel.png" width="20" heigth="20" alt="confirm"></button></th>
+      <th class="cellDelete"><button class="delete"><img src="./img/trash.png" width="20" heigth="20"alt="delete"></button></th>
+      <th class="cellEdit"><button class="edit"><img src="./img/pen.png" width="20" heigth="20" alt="edit"></button></th>
+      <th class="cellConfirm"><button class="confirm"><img src="./img/gavel.png" width="20" heigth="20" alt="confirm"></button></th>
       </tr>`)
     let obj = new Object();
     obj.name = name.value;
