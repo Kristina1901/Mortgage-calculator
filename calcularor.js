@@ -95,12 +95,20 @@ function calculate() {
                let monthpayment = ammountBorrowed * (parth / 12) * (1 + parth / 12)** month 
                let c = (1 + parth / 12) ** month - 1
                let result = Math.round(monthpayment / c)
-               table.insertAdjacentHTML('beforeend',
+               if (isNaN(result) === true) {
+                    table.insertAdjacentHTML('beforeend',
+                         `<tr>
+                 <th>${arr[arr.length - 1].name}</th>
+                 <th>Sorry, try again</th>
+           </tr>`)
+               }
+               else {
+                    table.insertAdjacentHTML('beforeend',
                          `<tr>
                  <th>${arr[arr.length - 1].name}</th>
                  <th>${result}</th>
            </tr>`)
-                         
+               }              
              
           }
 
