@@ -56,6 +56,7 @@ table {
 
 .activecell {
     border: solid 2px rgb(6, 222, 251);
+   
 }
 
 button {
@@ -149,7 +150,7 @@ select {
 .calculator__table {
     margin-left: 25px;
     position: relative;
-    left: 400px;
+    left: 200px;
 }
 img{
     display: block;
