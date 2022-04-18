@@ -3,7 +3,7 @@
 }
 
 body {
- background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(106, 74, 139, 1) 47%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(to right, #00f260, #0575e6);
     color: white;
     font-family: sans-serif;
     font-size: 14px;
@@ -29,28 +29,29 @@ form {
     align-items: center;
     justify-content: center;
     margin-top: 15px;
-    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    background: linear-gradient(to right, #59c173, #a17fe0, #5d26c1);
     border-radius: 8px;
 
 }
-
+table {
+    border-radius: 12px;
+}
 .container {
     padding: 25px;
 
 }
 
-th {
-    border: solid 2px white;
+ th {
+    width: 90px;
+    background: linear-gradient(to right, #642b73, #c6426e);
+    border-radius: 15px 50px 30px;
+     
 }
-
 .contaner__table {
     position: relative;
-    left: 400px;
-}
-
-th {
-    width: 90px;
-}
+    left: 500px;
+    max-width: 750px;
+ }
 
 .activecell {
     border: solid 2px rgb(6, 222, 251);
@@ -154,10 +155,22 @@ img{
 }
 .cellDelete {
     border: none;
+    background:rgba(205, 214, 219, 0.0);
 }
 .cellEdit {
    border: none;
+   background:rgba(205, 214, 219, 0.0);
 }
 .cellConfirm {
     border: none;
+    background:rgba(205, 214, 219, 0.0);
+}
+.calculator__table th {
+    width: 180px;
+    border-radius: 40px 10px;
+    background: linear-gradient(to right, #e65c00, #f9d423);
+    text-align: center;
+    align-items: 10px;
+    
+
 }
